@@ -1,15 +1,14 @@
 Summary:	IPLog - TCP/IP trafic logger.
 Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
 Name:		iplog
-Version:	2.1.0
+Version:	2.2.1
 Release:	1
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
-Source0:	http://www.numb.org/~odin/stuff/%name-%version.tar.gz
-Patch0:		
+Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
+Source1:	%{name}.init
 BuildRequires:	libpcap
-#Requires:	
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_prefix	/usr
@@ -22,22 +21,20 @@ TCP, UDP and ICMP trafic.
 
 %prep
 %setup -q
-
-#%patch
-
 %build
-./configure --prefix=%{_prefix}
+LDFLAGS="-s"; export LDFLAGS
+%configure
 %{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install
-	prefix=$RPM_BUILD_ROOT%{_prefix} \
-	man5dir=$RPM_BUILD_ROOT%{_mandir}/man5 \
-	man8dir=$RPM_BUILD_ROOT%{_mandir}/man8
+%{__make} install DESTDIR=$RPM_BUILD_ROOT 
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}
-cp example-iplog.rules $RPM_BUILD_ROOT%{_sysconfdir}/iplog.rules
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+
+install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/iplog
+
+cp example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{man5,man8}/* \
 	README AUTHORS NEWS TODO
@@ -48,6 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc {README,NEWS,TODO,AUTHORS}.gz
-%config(noreplace) %attr(600,root,root) %{_sysconfdir}/iplog.rules
+%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
+%attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/iplog.conf
 %{_mandir}/man[58]/*
