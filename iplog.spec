@@ -2,16 +2,20 @@ Summary:	IPLog - TCP/IP trafic logger
 Summary(pl):	IPLog - rejestrator obci±øenia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.1
-Release:	4
+Release:	5
 License:	GPL
 Group:		Daemons
 Group(de):	Server
+Group(es):	Servidores
+Group(fr):	Serveurs
 Group(pl):	Serwery
+Group(pt):	Server
+Group(ru):	‰≈ÕœŒŸ
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	libpcap
+BuildRequires:	libpcap-devel
 PreReq:		/sbin/chkconfig
 PreReq:		rc-scripts
 Obsoletes:	ippl
@@ -36,7 +40,7 @@ autoconf
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 %{__make} install DESTDIR=$RPM_BUILD_ROOT
 
@@ -66,8 +70,8 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc {README,NEWS,TODO,AUTHORS}.gz
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/iplog
+%doc *.gz
+%attr(754,root,root) /etc/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
 %attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/iplog.conf
 %{_mandir}/man[58]/*
