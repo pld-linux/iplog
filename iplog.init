@@ -40,7 +40,6 @@ case "$1" in
 		touch /var/lock/subsys/iplog
 	else
 		msg_already_running iplog
-		exit 1
 	fi
 	;;
   stop)
@@ -48,23 +47,23 @@ case "$1" in
 	if [ -f /var/lock/subsys/iplog ]; then
 		msg_stopping "IP protocols logger"
 		killproc iplog
-		rm -f /var/lock/subsys/iplog
-		rm -f /var/run/iplog.pid
+		rm -f /var/lock/subsys/iplog /var/run/iplog.pid >/dev/null 2>&1
 	else
 		msg_not_running iplog
-		exit 1
 	fi
 	;;
   status)
 	status iplog
+	exit $?
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	exit 1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit 0
