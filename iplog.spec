@@ -41,8 +41,6 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/iplog
 install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 
-gzip -9nf README AUTHORS NEWS TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -64,7 +62,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc README AUTHORS NEWS TODO
 %attr(754,root,root) /etc/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
 %attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/iplog.conf
