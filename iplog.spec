@@ -28,7 +28,7 @@ pakietów TCP, UDP i ICMP.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure
 %{__make}
 
