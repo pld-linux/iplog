@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+# iplogd		IP protocols logger
+#
+# chkconfig:	2345 50 50
+#
+# description:	IP protocols logger - logs TCP, UDP and ICMP.
+#
+# processname:	iplog
+# pidfile:	/var/run/iplog.pid
+# config:	/etc/iplog.conf
+
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+# Get network config
+. /etc/sysconfig/network
+
+# Get service config
+[ -f /etc/sysconfig/iplogd ] && . /etc/sysconfig/iplogd
+
+# Check that networking is up.
+if is_no "${NETWORKING}"; then
+	msg_Network_Down "IP protocols logger"
+	exit 1
+fi
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/iplog ]; then
+		msg_starting "IP protocols logger"
+		daemon iplog
+	else
+		msg_Already_Running iplog
+		exit 1
+	fi
+	touch /var/lock/subsys/iplog
+	;;
+  stop)
+	msg_stopping "IP protocols logger"
+	killproc iplog
+	rm -f /var/lock/subsys/iplog
+	rm -f /var/run/iplog.pid
+	;;
+  status)
+	status iplog
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	msg_Usage "$0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit 0
