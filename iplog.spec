@@ -8,6 +8,7 @@ Group:		Daemons
 Source0:	http://dl.sourceforge.net/ojnk/%{name}-%{version}.tar.gz
 # Source0-md5:	de98dd64018ab10ebe36e481cf00b7db
 Source1:	%{name}.init
+Patch0:		%{name}-gcc.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
@@ -26,6 +27,7 @@ pakietów TCP, UDP i ICMP.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__aclocal}
