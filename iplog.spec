@@ -27,11 +27,11 @@ TCP, UDP and ICMP trafic.
 
 %build
 ./configure --prefix=%{_prefix}
-make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install
+%{__make} install
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	man5dir=$RPM_BUILD_ROOT%{_mandir}/man5 \
 	man8dir=$RPM_BUILD_ROOT%{_mandir}/man8
