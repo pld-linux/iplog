@@ -10,7 +10,7 @@ Source:		http://www.numb.org/~odin/stuff/%name-%version.tar.gz
 #Patch:		
 BuildRequires:	libpcap
 #Requires:	
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_prefix	/usr
 
