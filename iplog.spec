@@ -2,7 +2,7 @@ Summary:	IPLog - TCP/IP trafic logger
 Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.1
-Release:	3
+Release:	4
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -10,6 +10,8 @@ Group(pl):	Serwery
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 BuildRequires:	libpcap
+BuildRequires:	autoconf
+BuildRequires:	automake
 Prereq:		rc-scripts
 Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -26,6 +28,8 @@ pakietów TCP, UDP i ICMP.
 %setup -q
 
 %build
+aclocal
+autoconf
 %configure
 %{__make}
 
