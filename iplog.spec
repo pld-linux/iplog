@@ -5,7 +5,7 @@ Version:	2.2.3
 Release:	1
 License:	GPL
 Group:		Daemons
-Source0:	http://prdownloads.sourceforge.net/ojnk/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/ojnk/%{name}-%{version}.tar.gz
 # Source0-md5:	de98dd64018ab10ebe36e481cf00b7db
 Source1:	%{name}.init
 BuildRequires:	autoconf
