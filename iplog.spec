@@ -5,7 +5,7 @@ Version:	2.1.0
 Release:	1
 Copyright:	GPL
 Group:		Daemons
-Group(pl):	Demony
+Group(pl):	Serwery
 Source:		http://www.numb.org/~odin/stuff/%name-%version.tar.gz
 #Patch:		
 BuildRequires:	libpcap
