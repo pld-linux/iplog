@@ -5,12 +5,6 @@ Version:	2.2.1
 Release:	5
 License:	GPL
 Group:		Daemons
-Group(de):	Server
-Group(es):	Servidores
-Group(fr):	Serveurs
-Group(pl):	Serwery
-Group(pt):	Server
-Group(ru):	Демоны
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 BuildRequires:	autoconf
