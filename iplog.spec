@@ -3,7 +3,7 @@ Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.3
 Release:	2
-License:	GPL
+License:	GPL v2
 Group:		Daemons
 Source0:	http://dl.sourceforge.net/ojnk/%{name}-%{version}.tar.gz
 # Source0-md5:	de98dd64018ab10ebe36e481cf00b7db
@@ -68,7 +68,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README AUTHORS NEWS TODO
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(754,root,root) /etc/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
 %attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/iplog.conf
