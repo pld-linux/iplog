@@ -36,20 +36,10 @@ install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 gzip -9nf README AUTHORS NEWS TODO
 
 %post
-/sbin/chkconfig --add iplog
-if [ -f /var/lock/subsys/iplog ]; then
-	/etc/rc.d/init.d/iplog restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/iplog start\" to start iplog daemon."
-fi
+DESC="iplog daemon"; %chkconfig_add
 
 %preun
-if [ "$0" = "1" ]; then
-	if [ -f /var/lock/subsys/iplog ]; then
-		/etc/rc.d/init.d/iplog stop >&2
-	fi
-	/sbin/chkconfig --del iplog
-fi
+%chkconfig_del
 
 %clean
 rm -rf $RPM_BUILD_ROOT
