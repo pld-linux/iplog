@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Daemons
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
+# Source0-md5:	ab1540c60a28d232e2c562f94845816b
 Source1:	%{name}.init
 BuildRequires:	autoconf
 BuildRequires:	automake
