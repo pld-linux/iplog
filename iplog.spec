@@ -1,15 +1,17 @@
-Summary:	IPLog - TCP/IP trafic logger.
+Summary:	IPLog - TCP/IP trafic logger
 Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
+Group(de):	Server
 Group(pl):	Serwery
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 BuildRequires:	libpcap
 Prereq:		rc-scripts
+Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -17,9 +19,12 @@ iplog is a TCP/IP trafic logger. Currently, it is capable of logging
 TCP, UDP and ICMP trafic.
 
 %description -l pl
+iplog jest rejestratorem ruchu TCP/IP. Aktualnie mo¿e logowaæ ruch
+pakietów TCP, UDP i ICMP.
 
 %prep
 %setup -q
+
 %build
 %configure
 %{__make}
@@ -34,6 +39,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/iplog
 install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 
 gzip -9nf README AUTHORS NEWS TODO
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add iplog
@@ -50,9 +58,6 @@ if [ "$0" = "1" ]; then
 	fi
 	/sbin/chkconfig --del iplog
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
