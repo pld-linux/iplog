@@ -22,9 +22,8 @@ TCP, UDP and ICMP trafic.
 %prep
 %setup -q
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure
-%{__make} RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -36,8 +35,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/iplog
 
 cp example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/{man5,man8}/* \
-	README AUTHORS NEWS TODO
+gzip -9nf README AUTHORS NEWS TODO
 
 %post
 /sbin/chkconfig --add iplog
