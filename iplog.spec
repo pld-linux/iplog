@@ -9,11 +9,12 @@ Group(de):	Server
 Group(pl):	Serwery
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
-BuildRequires:	libpcap
 BuildRequires:	autoconf
 BuildRequires:	automake
-Prereq:		rc-scripts
-Prereq:		/sbin/chkconfig
+BuildRequires:	libpcap
+PreReq:		/sbin/chkconfig
+PreReq:		rc-scripts
+Obsoletes:	ippl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -37,7 +38,7 @@ autoconf
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT 
+%{__make} install DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/iplog
 install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
@@ -68,5 +69,5 @@ fi
 %doc {README,NEWS,TODO,AUTHORS}.gz
 %attr(754,root,root) %{_sysconfdir}/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
-%attr(600,root,root) %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/iplog.conf
+%attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/iplog.conf
 %{_mandir}/man[58]/*
