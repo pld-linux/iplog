@@ -9,10 +9,8 @@ Group(pl):	Serwery
 Source0:	http://www.numb.org/~odin/stuff/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
 BuildRequires:	libpcap
-Prereq:		/sbin/chkconfig
+Prereq:		rc-scripts
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define	_prefix	/usr
 
 %description
 iplog is a TCP/IP trafic logger. Currently, it is capable of logging
@@ -28,13 +26,12 @@ TCP, UDP and ICMP trafic.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} install DESTDIR=$RPM_BUILD_ROOT 
-
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/iplog
+%{__make} install DESTDIR=$RPM_BUILD_ROOT 
 
-cp example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/iplog
+install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
 
 gzip -9nf README AUTHORS NEWS TODO
 
