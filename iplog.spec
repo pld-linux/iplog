@@ -12,8 +12,8 @@ Patch0:		%{name}-gcc.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
-PreReq:		/sbin/chkconfig
 PreReq:		rc-scripts
+Requires(post,preun):	/sbin/chkconfig
 Obsoletes:	ippl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
