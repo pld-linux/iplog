@@ -13,8 +13,8 @@ URL:		http://ojnk.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
-PreReq:		rc-scripts
 Requires(post,preun):	/sbin/chkconfig
+Requires:	rc-scripts
 Obsoletes:	ippl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,7 +42,8 @@ rm -f missing
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
-%{__make} install DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/iplog
 install example-iplog.conf $RPM_BUILD_ROOT%{_sysconfdir}/iplog.conf
@@ -71,5 +72,5 @@ fi
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(754,root,root) /etc/rc.d/init.d/iplog
 %attr(755,root,root) %{_sbindir}/iplog
-%attr(600,root,root) %config(noreplace) %verify(not md5 size mtime) %{_sysconfdir}/iplog.conf
+%attr(600,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/iplog.conf
 %{_mandir}/man[58]/*
