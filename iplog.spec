@@ -13,6 +13,7 @@ URL:		http://ojnk.sourceforge.net/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libpcap-devel
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,preun):	/sbin/chkconfig
 Requires:	rc-scripts
 Obsoletes:	ippl
@@ -53,17 +54,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/chkconfig --add iplog
-if [ -f /var/lock/subsys/iplog ]; then
-	/etc/rc.d/init.d/iplog restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/iplog start\" to start iplog daemon."
-fi
+%service iplog restart "iplog daemon"
 
 %preun
 if [ "$0" = "1" ]; then
-	if [ -f /var/lock/subsys/iplog ]; then
-		/etc/rc.d/init.d/iplog stop >&2
-	fi
+	%service iplog stop
 	/sbin/chkconfig --del iplog
 fi
 
