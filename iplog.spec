@@ -2,7 +2,7 @@ Summary:	IPLog - TCP/IP trafic logger
 Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.3
-Release:	2
+Release:	3
 License:	GPL v2
 Group:		Daemons
 Source0:	http://dl.sourceforge.net/ojnk/%{name}-%{version}.tar.gz
