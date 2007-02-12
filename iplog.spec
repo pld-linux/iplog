@@ -1,5 +1,5 @@
 Summary:	IPLog - TCP/IP trafic logger
-Summary(pl):	IPLog - rejestrator obci±¿enia sieci pakietami TCP/IP
+Summary(pl.UTF-8):   IPLog - rejestrator obciÄ…Å¼enia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.3
 Release:	3
@@ -23,9 +23,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 iplog is a TCP/IP trafic logger. Currently, it is capable of logging
 TCP, UDP and ICMP trafic.
 
-%description -l pl
-iplog jest rejestratorem ruchu TCP/IP. Aktualnie mo¿e logowaæ ruch
-pakietów TCP, UDP i ICMP.
+%description -l pl.UTF-8
+iplog jest rejestratorem ruchu TCP/IP. Aktualnie moÅ¼e logowaÄ‡ ruch
+pakietÃ³w TCP, UDP i ICMP.
 
 %prep
 %setup -q
