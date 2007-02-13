@@ -1,5 +1,5 @@
 Summary:	IPLog - TCP/IP trafic logger
-Summary(pl.UTF-8):   IPLog - rejestrator obciążenia sieci pakietami TCP/IP
+Summary(pl.UTF-8):	IPLog - rejestrator obciążenia sieci pakietami TCP/IP
 Name:		iplog
 Version:	2.2.3
 Release:	3
